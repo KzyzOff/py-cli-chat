@@ -1,7 +1,10 @@
-# Python CLI Chat
+# WIP Python CLI Chat
+
+__WORK IN PROGRESS__
 
 Python CLI chat application, using sockets and _curses_ module.
-In future messages are meant to be stored in local _Redis_ database.
+In future messages are meant to be stored in local _Redis_ database
+(or simply in _SQLite_).
 
 ### Project requirements
 
