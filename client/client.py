@@ -1,6 +1,6 @@
 import socket
 import time
-from utils import right_pad
+from common.common import right_pad
 
 
 class Client:
@@ -15,18 +15,14 @@ class Client:
         # try:
         self.socket.connect((self.addr, self.port))
         msg = 'Yo from a client'
-        msg = right_pad(str(len(msg)), self.HEADLEN) + msg
-        self.socket.send(msg.encode('utf-8'))
-        print('[CLIENT] Message sent')
-        # rlen = 0
-        # rcv = ''
-        # while rlen < self.MSGLEN:
-        #     print('Before recv...')
-        #     rcv += self.socket.recv(self.MSGLEN).decode('utf-8')
-        #     rlen += len(rcv)
-        # print(f'Got from server: {rcv}')
+        rdy2send = [f'[{i}] ' + msg for i in range(4)]
+        rdy2send = list(map(lambda el: right_pad(str(len(el)), self.HEADLEN) + el, rdy2send))
 
-        time.sleep(2)
+        for m in rdy2send:
+            self.socket.send(m.encode('utf-8'))
+            print('[CLIENT] Message sent')
+            time.sleep(2)
+
         end_msg = right_pad(str(len('')), self.HEADLEN)
         self.socket.send(end_msg.encode('utf-8'))
 
